@@ -4,7 +4,8 @@ import 'package:test/test.dart';
 void main () {
   FlutterDriver driver;
   //final textButton = find.byValueKey('textButtonKey');
-  final textButton = find.ancestor(of: find.text('Second'), matching: find.byType('TextButton'));
+  final findButtonWithAncestor = find.ancestor(of: find.text('Second'), matching: find.byType('TextButton'));
+  final findButtonWithDescendant = find.descendant(of: find.byType('ListView'), matching: find.byType('TextButton'));
 
 
   setUpAll(() async {
@@ -20,8 +21,12 @@ void main () {
 
 
   group('Trying to tap TextButton', (){
-    test('Tapping', () async {
-      await driver.tap(textButton);
+    test('Tapping Button With Ancestor', () async {
+      await driver.tap(findButtonWithAncestor);
+    });
+
+    test('Tapping Button With Descendant', () async {
+      await driver.tap(findButtonWithDescendant);
     });
   });
 
